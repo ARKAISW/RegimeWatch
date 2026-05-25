@@ -1,0 +1,6 @@
+pair,lag,f_stat,p_value,significant_5pct,significant_10pct
+KO/PEP,1,4.0624,0.061,False,True
+KO/PEP,2,4.2027,0.0391,True,True
+KO/PEP,3,4.0461,0.0402,True,True
+KO/PEP,4,4.3361,0.0445,True,True
+KO/PEP,5,2.2326,0.2283,False,False
