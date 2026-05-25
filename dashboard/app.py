@@ -128,6 +128,10 @@ if use_custom_mode:
                     # Only 40 API calls total, parallel fetch takes ~10-15s!
                     status.write(f"   → 2 tickers × 20 dates = 40 parallel calls")
                     custom_rai_raw = build_rai_series([custom_a, custom_b], custom_dates, max_workers=8)
+                    if custom_rai_raw.sum().sum() == 0:
+                        st.sidebar.error("⚠️ **API Fetch Failed:** Bright Data returned 0 for all queries. Please check the Streamlit Cloud logs (Manage app > Logs) to see if your API key is invalid, rate-limited, or out of credits.")
+                        status.write("   ⚠️ WARNING: All regulatory signals returned 0 (API failure).")
+                    
                     custom_rai_norm = normalise_rai(custom_rai_raw)
                     status.write("   ✅ Regulatory signals normalized")
 
@@ -212,6 +216,10 @@ else:
             status.write(f"   → {len(tickers)} tickers × {len(dates)} dates = {len(tickers)*len(dates)} API calls (8 concurrent)")
             status.write("   ⏳ Estimated ~4 minutes total…")
             rai_raw = build_rai_series(tickers, dates, max_workers=8)
+            if rai_raw.sum().sum() == 0:
+                st.sidebar.error("⚠️ **API Fetch Failed:** Bright Data returned 0 for all queries. Please check the Streamlit Cloud logs (Manage app > Logs) to see if your API key is invalid, rate-limited, or out of credits.")
+                status.write("   ⚠️ WARNING: All regulatory signals returned 0 (API failure).")
+                
             rai_norm = normalise_rai(rai_raw)
             rai_raw.to_csv(rpath("rai_raw.csv"))
             rai_norm.to_csv(rpath("rai_normalised.csv"))
