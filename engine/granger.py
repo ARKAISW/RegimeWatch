@@ -28,7 +28,7 @@ def run_granger_tests(pair_metrics: dict, pair_rai: dict, pairs_list: list = Non
         rai     = pair_rai[pair][["rai_divergence"]].dropna()
         combined = metrics.join(rai, how="inner").dropna()
 
-        if len(combined) < 15:
+        if len(combined) < 10:
             print(f"[granger] {pair}: not enough data ({len(combined)} rows), skipping")
             continue
 

@@ -7,10 +7,10 @@ from output.schema import PairHealthObject
 from config import PAIRS, WATCH_THRESHOLD, ELEVATED_THRESHOLD, SUSPEND_THRESHOLD
 
 
-def trend_slope(series: pd.Series, window: int = 30) -> float:
+def trend_slope(series: pd.Series, window: int = 7) -> float:
     """Linear slope of last `window` observations."""
     s = series.dropna().tail(window)
-    if len(s) < 5:
+    if len(s) < 3:
         return np.nan
     x = np.arange(len(s))
     return float(np.polyfit(x, s.values, 1)[0])
@@ -29,19 +29,19 @@ def assign_risk_flag(rai_div: float, hl_trend: float, eigen_trend: float) -> str
     return "NORMAL"
 
 
-def _precompute_rolling_slopes(series: pd.Series, window: int = 30) -> pd.Series:
+def _precompute_rolling_slopes(series: pd.Series, window: int = 7) -> pd.Series:
     """
     Pre-compute rolling linear slope for a series.
     More efficient than computing expanding-then-tail for each row.
     """
     def _slope(arr):
         arr = arr[~np.isnan(arr)]
-        if len(arr) < 5:
+        if len(arr) < 3:
             return np.nan
         x = np.arange(len(arr))
         return np.polyfit(x, arr, 1)[0]
 
-    return series.rolling(window=window, min_periods=5).apply(_slope, raw=True)
+    return series.rolling(window=window, min_periods=3).apply(_slope, raw=True)
 
 
 def build_health_objects(
