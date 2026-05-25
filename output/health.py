@@ -80,11 +80,13 @@ def build_health_objects(
 
         # Best Granger lag for this pair (pair-level, not time-varying)
         pair_key = f"{pair[0]}/{pair[1]}"
-        gr = granger_results[
-            (granger_results["pair"] == pair_key) &
-            (granger_results["significant_10pct"] == True)
-        ]
-        signal_lag = int(gr["lag"].min()) if not gr.empty else -1
+        signal_lag = -1
+        if not granger_results.empty and "pair" in granger_results.columns:
+            gr = granger_results[
+                (granger_results["pair"] == pair_key) &
+                (granger_results["significant_10pct"] == True)
+            ]
+            signal_lag = int(gr["lag"].min()) if not gr.empty else -1
 
         for date, row in combined.iterrows():
             hl_trend    = hl_slopes.get(date, np.nan)
