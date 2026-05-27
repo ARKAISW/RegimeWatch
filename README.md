@@ -106,13 +106,13 @@ regimewatch/
 ### 1. Clone & Install
 Ensure you have Python 3.10+ installed.
 ```bash
-git clone https://github.com/YOUR_USERNAME/RegimeWatch.git
+git clone https://github.com/ARKAISW/RegimeWatch.git
 cd RegimeWatch
-pip install -r regimewatch/requirements.txt
+pip install -r requirements.txt
 ```
 
 ### 2. Configure Credentials
-Create a `.env` file inside the `regimewatch/` directory:
+Create a `.env` file in the project root:
 ```env
 BRIGHTDATA_API_KEY=your_brightdata_api_key_here
 BRIGHTDATA_SERP_ZONE=serp_api1
@@ -125,13 +125,13 @@ BRIGHTDATA_SERP_ZONE=serp_api1
 ### A. Run the Live Streamlit Dashboard (Recommended)
 This launches the interactive visualization. Judges can use the preset data or use the custom analyzer inside the sidebar:
 ```bash
-streamlit run regimewatch/dashboard/app.py
+streamlit run dashboard/app.py
 ```
 
 ### B. Standalone CLI Execution
 To rebuild the entire pre-computed pipeline datasets for all 10 default preset pairs:
 ```bash
-python regimewatch/main.py
+python main.py
 ```
 
 ---
