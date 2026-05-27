@@ -21,7 +21,10 @@ import json
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-st.set_page_config(page_title="RegimeWatch", layout="wide", page_icon="🔍")
+# Resolve logo path
+LOGO_PATH = os.path.join(PROJECT_ROOT, "assets", "logo.png")
+
+st.set_page_config(page_title="RegimeWatch", layout="wide", page_icon=LOGO_PATH)
 
 # ── Helper: resolve path inside results/ ────────────────────────────
 def rpath(filename: str) -> str:
@@ -263,8 +266,13 @@ else:
 #  MAIN DASHBOARD
 # ══════════════════════════════════════════════════════════════════════
 
-st.title("🔍 RegimeWatch")
-st.caption("Live Regulatory Attention as a Leading Indicator of Cointegration Breakdown")
+# Display logo + title
+_logo_col, _title_col = st.columns([0.06, 0.94])
+with _logo_col:
+    st.image(LOGO_PATH, width=64)
+with _title_col:
+    st.title("RegimeWatch")
+    st.caption("Live Regulatory Attention as a Leading Indicator of Cointegration Breakdown")
 
 # Load correct data according to mode
 health_df = load_health_data(use_custom=use_custom_mode)
