@@ -2,7 +2,7 @@
 ### *Detecting Cointegration Breakdown in Pairs Trading Using Regulatory News Volume as a Leading Indicator*
 
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://regimewatch-1.streamlit.app/)
 [![API Source](https://img.shields.io/badge/Bright%20Data-SERP%20API-orange.svg)](https://brightdata.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
